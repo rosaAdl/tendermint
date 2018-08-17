@@ -117,8 +117,9 @@ func (tm2pb) Validators(vals *ValidatorSet) []abci.Validator {
 func (tm2pb) ConsensusParams(params *ConsensusParams) *abci.ConsensusParams {
 	return &abci.ConsensusParams{
 		BlockSize: &abci.BlockSize{
-			MaxBytes: int32(params.BlockSize.MaxBytes),
-			MaxGas:      params.BlockSize.MaxGas,
+			MaxBytes:        int32(params.BlockSize.MaxBytes),
+			MaxGas:          params.BlockSize.MaxGas,
+			MaxNumEvidences: int32(params.BlockSize.MaxNumEvidences),
 		},
 		TxSize: &abci.TxSize{
 			MaxBytes: int32(params.TxSize.MaxBytes),
@@ -230,8 +231,9 @@ func (pb2tm) Validators(vals []abci.Validator) ([]*Validator, error) {
 func (pb2tm) ConsensusParams(csp *abci.ConsensusParams) ConsensusParams {
 	return ConsensusParams{
 		BlockSize: BlockSize{
-			MaxBytes: int(csp.BlockSize.MaxBytes), // XXX
-			MaxGas:      csp.BlockSize.MaxGas,
+			MaxBytes:        int(csp.BlockSize.MaxBytes), // XXX
+			MaxGas:          csp.BlockSize.MaxGas,
+			MaxNumEvidences: int(csp.BlockSize.MaxNumEvidences), // XXX
 		},
 		TxSize: TxSize{
 			MaxBytes: int(csp.TxSize.MaxBytes), // XXX
